@@ -267,7 +267,7 @@ function updateData(updateId)
 function update()
 {
   console.log(selectedUpdateId)
-  var myModal = new bootstrap.Modal(document.getElementById('update'))
+  let myModal = new bootstrap.Modal(document.getElementById('update'))
   myModal.hide()
   
   let deptid= document.getElementById("deptid_u").value;
@@ -359,7 +359,7 @@ function getAllData()
 	{
 		if(xmlhttp.status==200)
 		{
-			//console.log(xmlhttp.responseText);
+			
 			
       responsData =JSON.parse(xmlhttp.responseText);
      //responsData.forEach(element => console.log(element));

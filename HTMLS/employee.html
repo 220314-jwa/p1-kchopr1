@@ -234,26 +234,6 @@ function deleteData(id)
 }
 
 function updateData(updateId)
-{
-  /*var myModal = new bootstrap.Modal(document.getElementById('update'))
-  myModal.show()
-  var alldata=responsData
-  var selected;
-  console.log(updateId);
-  selectedUpdateId=updateId;
-  for (let index = 0; index < alldata.length; index++) {
-    const element = alldata[index];
-    console.log(element.id);
-    if(element.id==updateId)
-    {
-      console.log(element);
-      selected=element;
-    }
-  }*/
-  //document.getElementById("deptid_u").value =selected.deptid;
- // document.getElementById("dept_name_u").value =selected.dept_name;
- // document.getElementById("dep_head_id_u").value =selected.dep_head_id;
-}
 
 function update()
 {
@@ -376,11 +356,11 @@ function getAllData()
 function addNewData()
 {
 
-  var firstname=document.getElementById("firstname").value 
-  var lastname= document.getElementById("lastname").value 
-  var username =document.getElementById("username").value 
-  var password =document.getElementById("password").value 
-  var role =document.getElementById("role").value
+  let firstname=document.getElementById("firstname").value 
+  let lastname= document.getElementById("lastname").value 
+  let username =document.getElementById("username").value 
+  let password =document.getElementById("password").value 
+  let role =document.getElementById("role").value
 
   console.log(departmendselectedId)
 

@@ -128,7 +128,7 @@ function deleteData(id)
   let ok=confirm("Are you confirm..?");
   if(ok)
   {
-      var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+      let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
       xmlhttp.open("DELETE", theUrl+"status/"+id);
       xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xmlhttp.send();
@@ -150,7 +150,7 @@ function deleteData(id)
 function updateData(updateId)
 {
 
-  var myModal = new bootstrap.Modal(document.getElementById('update'))
+  let myModal = new bootstrap.Modal(document.getElementById('update'))
   
   myModal.show()
   let alldata=responsData
@@ -173,7 +173,7 @@ function updateData(updateId)
 function update()
 {
   console.log(selectedUpdateId)
-  var myModal = new bootstrap.Modal(document.getElementById('update'))
+  let myModal = new bootstrap.Modal(document.getElementById('update'))
   myModal.hide()
   
   let status_name = document.getElementById("status_name_u").value;
@@ -201,24 +201,11 @@ function update()
 }
 
 window.addEventListener('load', function() {
-  
-/* var user=sessionStorage.getItem('role');
- console.log(user)
- if(user=='admin')
- {
-  getAllData();
- } 
- else
- {
-  window.location = "index.html"
- }
-*/
-
 });
 
 function getAllData()
 {
-	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+	let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
 	xmlhttp.open("GET", theUrl+"status");
 	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xmlhttp.send();
@@ -250,10 +237,10 @@ function getAllData()
 function formToJSon()
 {
   console.log("dgfdg");
-  var elements = document.getElementById("addForm").elements;
-      var obj ={};
-      for(var i = 0 ; i < elements.length-1 ; i++){
-          var item = elements.item(i);
+  let elements = document.getElementById("addForm").elements;
+      let obj ={};
+      for(let i = 0 ; i < elements.length-1 ; i++){
+          let item = elements.item(i);
           obj[item.name] = item.value;
       }
     
@@ -263,7 +250,7 @@ function formToJSon()
       }
       this.data=obj;
 
-      var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+      let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
       xmlhttp.open("POST", theUrl+"status")
       xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xmlhttp.send(JSON.stringify(this.data));
@@ -293,9 +280,9 @@ function addNewData()
   let status_name = document.getElementById("status_name").value;
   let statusid = document.getElementById("statusid").value;
   
-  var JSONObj = { "status_name" :status_name, "statusid"  : statusid };
+  let JSONObj = { "status_name" :status_name, "statusid"  : statusid };
   console.log(JSONObj)
-  var xmlhttp = new XMLHttpRequest();
+  let xmlhttp = new XMLHttpRequest();
       xmlhttp.open("POST", theUrl+"status")
       xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xmlhttp.send(JSON.stringify(JSONObj));
