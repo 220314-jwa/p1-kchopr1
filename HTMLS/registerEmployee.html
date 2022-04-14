@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+     
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Login</a>
+        </li>
+      </ul>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+</div>
+
+<div class="container">
+		
+	<div class="row d-grid gap-3  p-4">
+		<h1 class="text-center  p-2 bg-light border ">YOYR Reimbursement</h1>
+	</div>
+</div>
+<div class="container">
+        <button type="button" class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNew" onclick="addNewReq()">ADD NEW REQUEST</button><br><br>
+<div class="table-responsive">
+<table class="table table-sm" >
+  <thead>
+    <tr>
+      <th scope="col">E-Name</th>
+      <th scope="col">Dep Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Event</th>
+      <th scope="col">Date</th>
+      <th scope="col">VIEW</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+   <h4 id="heading">Loading.....<h4>
+  </tbody>
+</table>
+</div>
+</div>
+
+
+<!-- Modal  VIEW-->
+<div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">VIEW Reimbursement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>Cost</label>
+        <br>
+        <input type="number" id="cost" class="form-control form-control-lg" type="text" placeholder="Cost"
+          required >
+        <br>
+        <label>Event date</label>
+        <br>
+        <input type="date" id="event_date" class="form-control form-control-lg" type="text"
+          placeholder="Event Date"  >
+          <br>
+        <label>Submited Date</label>
+        <br>
+        <input type="date" id="submited_date" class="form-control form-control-lg" type="text"
+          placeholder="Submited Date"  >
+          <br>
+          <label>Location</label>
+          <br>
+        <input type="text" id="location" class="form-control form-control-lg" type="text"
+          placeholder="Locatin"  >
+          <br>
+          <label>Description</label>
+          <br>
+          <textarea id="description" class="form-control"  rows="3"></textarea>
+          <br>
+          <label>Event</label>
+          <br>
+          <select id="eventList"  name="eventList" class="form-control dropdown" onchange="eventChanged()" ></select>
+        <div class="modal-footer">
+          <button class="btn btn-primary d-grid gap-2 col-6 mx-auto"  onclick="addNewData()"   data-bs-dismiss="modal" >Submit</button> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Modal  VIEW-->
+<div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">VIEW Reimbursement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>First Name</label>
+        <br>
+        <input type="text" id="firstname_v" class="form-control form-control-lg" type="text" placeholder="FirstName"
+           disabled>
+        <br>
+        <label>Last Name</label>
+        <br>
+        <input type="text" id="lastname_v" class="form-control form-control-lg" type="text" placeholder="Last Name"
+           disabled>
+        <br>
+        <label>Dep Name</label>
+        <br>
+        <input type="text" id="dept_name_v" class="form-control form-control-lg" type="text" placeholder="Department Name"
+           disabled>
+        <br>
+        <label>Event</label>
+        <br>
+        <input type="text" id="event_type_v" class="form-control form-control-lg" type="text" placeholder="Event Name"
+          required disabled>
+        <br>
+        <label>Status</label>
+        <br>
+        <input type="text" id="status_v" class="form-control form-control-lg" type="text" placeholder="Status" 
+          disabled>
+        <br>
+        <label>Cost</label>
+        <br>
+        <input type="text" id="cost_v" class="form-control form-control-lg" type="text" placeholder="Cost"
+          required disabled>
+        <br>
+        <label>Event date</label>
+        <br>
+        <input type="text" id="event_date_v" class="form-control form-control-lg" type="text"
+          placeholder="Event Date"  disabled>
+          <br>
+        <label>Submited Date</label>
+        <br>
+        <input type="text" id="submited_date_v" class="form-control form-control-lg" type="text"
+          placeholder="Submited Date"  disabled>
+          <br>
+          <label>Location</label>
+          <br>
+        <input type="text" id="location_v" class="form-control form-control-lg" type="text"
+          placeholder="Locatin"  disabled>
+          <br>
+          <label>Description</label>
+          <br>
+          <textarea id="description_v" class="form-control"  rows="3"></textarea>
+
+         
+        <div class="modal-footer">
+          <!-- <button class="btn btn-primary d-grid gap-2 col-6 mx-auto"  onclick="update()"   data-bs-dismiss="modal" >Submit</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</body>
+<style>
+
+  /* BASIC */
+  
+  html {
+    background-color: #56baed;
+  }
+</style>  
+<script src="config.js"></script>
+<script>
+let responsData;
+let data={};
+let selectedUpdateId;
+let eventdselectedId;
+function addNewReq()
+{
+  getEvents()
+}
+function eventChanged()
+{
+  eventdselectedId = document.getElementById('eventList').value;
+    console.log(eventdselectedId)
+}
+
+
+function view(eid)
+{
+  console.log(eid)
+  let myModal = new bootstrap.Modal(document.getElementById('view'))
+  myModal.show()
+  for(i=0;i<responsData.length;i++)
+  {
+    if(eid==responsData[i].id)
+    {
+      console.log(responsData[i])
+     // var temp=JSON.parse(responsData[i])
+      let emp=responsData[i].employee
+      let dep=emp.department
+      let event=responsData[i].event
+      let status=responsData[i].status
+
+      console.log(responsData[i].cost);
+      console.log(responsData[i].submited_date);
+      console.log(responsData[i].location);
+      console.log(responsData[i].description);
+      
+      document.getElementById("firstname_v").value =emp.firstname;
+      document.getElementById("lastname_v").value =emp.lastname;
+      document.getElementById("dept_name_v").value =dep.dept_name;
+      document.getElementById("event_type_v").value =event.event_type;
+      document.getElementById("status_v").value =status.status_name;
+      document.getElementById("cost_v").value =responsData[i].cost;
+      document.getElementById("submited_date_v").value =responsData[i].submited_date;
+      document.getElementById("location_v").value =responsData[i].location;
+      document.getElementById("description_v").value =responsData[i].description;
+      document.getElementById("event_date_v").value =responsData[i].event_date;
+      
+    }
+  }
+  
+}
+
+function updateData(updateId)
+{
+  console.log(updateId);
+ // var myModal = new bootstrap.Modal(document.getElementById('update'))
+  //myModal.show()
+  let alldata=responsData
+  console.log(alldata)
+
+  let selected;
+  
+  selectedUpdateId=updateId;
+  for (let index = 0; index < alldata.length; index++) {
+    const element = alldata[index];
+    console.log(element.id);
+    if(element.id==updateId)
+    {
+      console.log(element);
+      selected=element;
+    }
+  }
+ //selected.employee.id=16
+  console.log(selected);
+  console.log(selected);
+  //document.getElementById("deptid_u").value =selected.deptid;
+ // document.getElementById("dept_name_u").value =selected.dept_name;
+ // document.getElementById("dep_head_id_u").value =selected.dep_head_id;
+}
+
+function update()
+{
+  console.log(selectedUpdateId)
+  var myModal = new bootstrap.Modal(document.getElementById('update'))
+  myModal.hide()
+  
+  let deptid= document.getElementById("deptid_u").value;
+  let dept_name = document.getElementById("dept_name_u").value;
+  let dep_head_id = document.getElementById("dep_head_id_u").value;
+  
+  let JSONObj = { "deptid" :deptid, "dept_name"  : dept_name,"dep_head_id":dep_head_id };
+  console.log(JSONObj)
+  let xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("PATCH", theUrl+"department/"+selectedUpdateId)
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send(JSON.stringify(JSONObj));
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          console.log(xmlhttp.responseText);
+        }
+        else
+        {
+          console.log("ERRRROR");
+        }
+        getAllData();
+      }
+      
+}
+
+window.addEventListener('load', function() {
+
+ /* console.log("registerEmployee");
+  console.log("registerEmployee");
+  console.log("registerEmployee");
+
+  console.log(sessionStorage.getItem('id'));
+  console.log(sessionStorage.getItem('username'));
+  console.log(sessionStorage.getItem('password'));
+  console.log(sessionStorage.getItem('role'));*/
+let user=sessionStorage.getItem('role');
+ console.log(user)
+ if(user=='employee')
+ {
+  getAllData();
+ } 
+ else
+ {
+  window.location = "index.html"
+ }
+getAllData();
+
+
+   
+});
+function getEvents()
+{
+
+  console.log("event")
+  let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+	xmlhttp.open("GET", theUrl+"event");
+	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xmlhttp.send();
+	xmlhttp.onreadystatechange=function()
+	{
+		if(xmlhttp.status==200)
+		{
+      const sb = document.querySelector('#eventList');
+		//	console.log(xmlhttp.responseText);
+      responsDataStatus =JSON.parse(xmlhttp.responseText);
+      //responsDataStatus=xmlhttp.responseText
+      console.log(responsDataStatus);
+      for(i=0;i<responsDataStatus.length;i++)
+      {
+        console.log(responsDataStatus[i])
+        const option1 = new Option(responsDataStatus[i].event_type,responsDataStatus[i].id);
+        sb.add(option1,undefined)
+      }
+			
+		}
+	}
+
+}
+
+function getAllData()
+{
+	let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+	xmlhttp.open("GET", theUrl+"reimbursement");
+	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xmlhttp.send();
+	xmlhttp.onreadystatechange=function()
+	{
+		if(xmlhttp.status==200)
+		{
+			//console.log(xmlhttp.responseText);
+			
+      responsData =JSON.parse(xmlhttp.responseText);
+     //responsData.forEach(element => console.log(element));
+
+      let htmlContent="";
+      // htmlContent="<tr> <td>1</td> <td>1</td> <td>1</td>  <td> <button class=btn btn-danger onclick=deleteData(1)>DELETE</button> </td>  <td> <button class=btn btn-danger onclick=updateData(1)>UPDATE</button> </td> </tr>";
+      //document.getElementById("tbody").innerHTML=htmlContent;
+      for(i=0;i<responsData.length;i++)
+      {
+       let emp=responsData[i].employee
+       let dep=emp.department
+       let event=responsData[i].event
+       let status=responsData[i].status
+       let empId=sessionStorage.getItem('id')
+      // console.log(empId)
+       if(empId==emp.id)
+       {
+        htmlContent=htmlContent+"<tr> <td>"+emp.firstname+"</td><td>"+dep.dept_name+"</td><td>"+status.status_name+"</td><td>"+event.event_type+"</td><td>"+responsData[i].submited_date+"</td><td><button class=btn btn-danger onclick=view("+responsData[i].id+")>VIEW</button></td></tr>";
+       }
+      }
+       document.getElementById("tbody").innerHTML=htmlContent;
+       document.getElementById("heading").innerHTML=""
+		}
+    else
+    {
+      document.getElementById("heading").innerHTML="You Dont Have any Data";
+    }
+	}
+}
+
+function addNewData()
+{
+
+  console.log(eventdselectedId);
+  let cost=document.getElementById("cost").value 
+  let event_date= document.getElementById("event_date").value 
+  let description =document.getElementById("description").value 
+  let location =document.getElementById("location").value 
+  let submited_date =document.getElementById("submited_date").value
+  let empid=sessionStorage.getItem('id')
+
+  let emp={"id":empid}
+  let event={"id":eventdselectedId}
+  let status={"id":1}
+
+
+  let JSONObj = { "employee" :emp, "event"  : event,"status":status,"cost":cost,"event_date":event_date,"description":description,"location":location,"submited_date":submited_date};
+  console.log(JSONObj)
+ // console.log(JSON.stringify(JSONObj))
+  
+ let xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", theUrl+"reimbursement")
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send(JSON.stringify(JSONObj));
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          console.log(xmlhttp.responseText);
+        }
+        else
+        {
+          console.log("ERRRROR");
+        }
+      }
+      getAllData();
+}
+</script>
+</html>

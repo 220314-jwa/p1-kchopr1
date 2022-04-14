@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation" >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+     
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="statusDisplay.html">Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="dipartment.html">Department</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="Employee.html">Employees</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="events.html">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="reimbursement.html">Reimbursement</a>
+        </li>
+      </ul>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+</div>
+
+<div class="container">
+		
+	<div class="row d-grid gap-3  p-4">
+		<h1 class="text-center  p-2 bg-light border ">EMPLOYEE</h1>
+	</div>
+</div>
+<div class="container">
+        <button type="button" class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNew" onclick="add()">ADD NEW EMPLOYEE</button><br><br>
+<div class="table-responsive">
+<table class="table table-sm" >
+  <thead>
+    <tr>
+      <th scope="col">Emp-F-name</th>
+      <th scope="col">Emp-L-name</th>
+      <th scope="col">Dep Name</th>
+      <th scope="col">DELETE</th>
+      <th scope="col">UPDATE</th>
+      <th scope="col">VIEW</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+   
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<!-- Modal  ADD UPDATE-->
+<div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">VIEW EMPLOYEE</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>First Name</label>
+        <br>
+        <input type="text" id="firstname_v" class="form-control form-control-lg" type="text" placeholder="FirstName"
+          required disabled>
+        <br>
+        <label>Last Name</label>
+        <br>
+        <input type="text" id="lastname_v" class="form-control form-control-lg" type="text" placeholder="Last Name"
+          required disabled>
+        <br>
+        <label>User Name</label>
+        <br>
+        <input type="text" id="username_v" class="form-control form-control-lg" type="text" placeholder="User Name"
+          required disabled>
+        <br>
+        <label>Password</label>
+        <br>
+        <input type="text" id="password_v" class="form-control form-control-lg" type="text" placeholder="Password"
+          required disabled>
+        <br>
+        <label>Role</label>
+        <br>
+        <input type="text" id="role_v" class="form-control form-control-lg" type="text" placeholder="Role" required
+          disabled>
+        <br>
+        <label>Department id</label>
+        <br>
+        <input type="text" id="deptid_v" class="form-control form-control-lg" type="text" placeholder="Department ID"
+          required disabled>
+        <br>
+        <label>Department Name</label>
+        <br>
+        <input type="text" id="dept_name_v" class="form-control form-control-lg" type="text" placeholder="Department Name"
+          required disabled>
+        <br>
+        <label>Department Head ID</label>
+        <br>
+        <input type="number" id="dep_head_id_v" class="form-control form-control-lg" type="text"
+          placeholder="Department Head ID.." required disabled>
+
+        <div class="modal-footer">
+          <!-- <button class="btn btn-primary d-grid gap-2 col-6 mx-auto"  onclick="update()"   data-bs-dismiss="modal" >Submit</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal  ADD NEW -->
+<div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ADD NEW EMPLOYEES</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="add()"></button>
+      </div>
+      <div class="modal-body">
+
+        <input type="text" id="firstname" class="form-control form-control-lg" type="text" placeholder="FirstName"
+          required >
+        <br>
+        <input type="text" id="lastname" class="form-control form-control-lg" type="text" placeholder="Last Name"
+          required >
+        <br>
+        <input type="text" id="username" class="form-control form-control-lg" type="text" placeholder="User Name"
+          required >
+        <br>
+        <input type="text" id="password" class="form-control form-control-lg" type="text" placeholder="Password"
+          required >
+        <br>
+        <input type="text" id="role" class="form-control form-control-lg" type="text" placeholder="Role." required>
+        <br>
+        <label>Department</label>
+        <select id="depList"  name="depList" class="form-control dropdown" onchange="departmentChanged()" >
+        <br>
+          <input type="button" class="btn btn-primary   mx-auto form-control form-control-lg" onclick="addNewData()" data-bs-dismiss="modal" value="Submit" style="margin-top: 19px;"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<style>
+
+  /* BASIC */
+  
+  html {
+    background-color: #56baed;
+  } </style>
+<script src="config.js"></script>
+<script>
+let responsData;
+let data={};
+let selectedUpdateId;
+let departmendselectedId;
+
+function departmentChanged()
+{
+   departmendselectedId = document.getElementById('depList').value;
+   console.log(departmendselectedId)
+
+}
+
+function view(eid)
+{
+  console.log(eid)
+  let myModal = new bootstrap.Modal(document.getElementById('view'))
+  myModal.show()
+  for(i=0;i<responsData.length;i++)
+  {
+    if(eid==responsData[i].id)
+    {
+      console.log(responsData[i])
+    let  dep=responsData[i].department
+      document.getElementById("firstname_v").value =responsData[i].firstname;
+      document.getElementById("lastname_v").value =responsData[i].lastname;
+      document.getElementById("username_v").value =responsData[i].username;
+      document.getElementById("password_v").value =responsData[i].password;
+      document.getElementById("role_v").value =responsData[i].role;
+      document.getElementById("deptid_v").value =dep.deptid;
+      document.getElementById("dept_name_v").value =dep.dept_name;
+      document.getElementById("dep_head_id_v").value =dep.dep_head_id;
+    }
+  }
+  
+}
+
+function deleteData(id)
+{
+  this.id=id;
+  console.log(id);
+  let ok=confirm("Are you confirm..?");
+  if(ok)
+  {
+      let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+      xmlhttp.open("DELETE", theUrl+"department/"+id);
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send();
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          console.log(xmlhttp.responseText);
+        }
+        //getAllData();
+      }
+  }
+  else
+  {
+    console.log("false");
+  }
+}
+
+function updateData(updateId)
+{
+  /*var myModal = new bootstrap.Modal(document.getElementById('update'))
+  myModal.show()
+  var alldata=responsData
+  var selected;
+  console.log(updateId);
+  selectedUpdateId=updateId;
+  for (let index = 0; index < alldata.length; index++) {
+    const element = alldata[index];
+    console.log(element.id);
+    if(element.id==updateId)
+    {
+      console.log(element);
+      selected=element;
+    }
+  }*/
+  //document.getElementById("deptid_u").value =selected.deptid;
+ // document.getElementById("dept_name_u").value =selected.dept_name;
+ // document.getElementById("dep_head_id_u").value =selected.dep_head_id;
+}
+
+function update()
+{
+  console.log(selectedUpdateId)
+  let myModal = new bootstrap.Modal(document.getElementById('update'))
+  myModal.hide()
+  
+  let deptid= document.getElementById("deptid_u").value;
+  let dept_name = document.getElementById("dept_name_u").value;
+  let dep_head_id = document.getElementById("dep_head_id_u").value;
+  
+  let JSONObj = { "deptid" :deptid, "dept_name"  : dept_name,"dep_head_id":dep_head_id };
+  console.log(JSONObj)
+  let xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("PATCH", theUrl+"department/"+selectedUpdateId)
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send(JSON.stringify(JSONObj));
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          console.log(xmlhttp.responseText);
+        }
+        else
+        {
+          console.log("ERRRROR");
+        }
+        //getAllData();
+      }
+      
+}
+
+window.addEventListener('load', function() {
+
+ /* console.log("employeeeeeee")
+  console.log("employeeeeeee")
+  console.log("employeeeeeee")
+ console.log(sessionStorage.getItem("role"))
+ console.log(localStorage.getItem("role"))*/
+
+let user=sessionStorage.getItem('role');
+ console.log(user)
+ if(user=='admin')
+ {
+  getAllData();
+  
+ } 
+ else
+ {
+  window.location = "index.html"
+ }
+ 
+    
+   
+});
+
+function add()
+{
+  console.log("add");
+  getDepartment();
+}
+function getDepartment()
+{
+
+  let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+	xmlhttp.open("GET", theUrl+"department");
+	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xmlhttp.send();
+	xmlhttp.onreadystatechange=function()
+	{
+		if(xmlhttp.status==200)
+		{
+      const sb = document.querySelector('#depList');
+			//console.log(xmlhttp.responseText);
+      responsData =JSON.parse(xmlhttp.responseText);;
+      for(i=0;i<responsData.length;i++)
+      {
+       // console.log(responsData[i])
+        const option1 = new Option(responsData[i].dept_name,responsData[i].id);
+        sb.add(option1,undefined)
+      }
+			
+		}
+	}
+ // console.log("addNewData")
+}
+
+function getAllData()
+{
+	let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+	xmlhttp.open("GET", theUrl+"employee");
+	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xmlhttp.send();
+	xmlhttp.onreadystatechange=function()
+	{
+		if(xmlhttp.status==200)
+		{
+			//console.log(xmlhttp.responseText);
+			
+      responsData =JSON.parse(xmlhttp.responseText);
+     // responsData.forEach(element => console.log(element));
+
+      let htmlContent="";
+      // htmlContent="<tr> <td>1</td> <td>1</td> <td>1</td>  <td> <button class=btn btn-danger onclick=deleteData(1)>DELETE</button> </td>  <td> <button class=btn btn-danger onclick=updateData(1)>UPDATE</button> </td> </tr>";
+      //document.getElementById("tbody").innerHTML=htmlContent;
+      for(i=0;i<responsData.length;i++)
+      {
+        let dep=responsData[i].department
+       // console.log(dep)
+        htmlContent=htmlContent+"<tr> <td>"+responsData[i].firstname+"</td><td>"+responsData[i].lastname+"</td><td>"+dep.dept_name+"</td><td> <button class=btn btn-danger onclick=deleteData("+responsData[i].id+")>DELETE</button> </td>  <td> <button class=btn btn-danger onclick=updateData("+responsData[i].id+")>UPDATE</button> </td>  <td><button class=btn btn-danger onclick=view("+responsData[i].id+")>VIEW</button></td></tr>";
+        //console.log(responsData[i])
+
+      }
+      document.getElementById("tbody").innerHTML=htmlContent;
+			
+		}
+	}
+}
+
+function addNewData()
+{
+
+  var firstname=document.getElementById("firstname").value 
+  var lastname= document.getElementById("lastname").value 
+  var username =document.getElementById("username").value 
+  var password =document.getElementById("password").value 
+  var role =document.getElementById("role").value
+
+  console.log(departmendselectedId)
+
+  let jsonDep={"id":departmendselectedId}
+  let JSONObj = { "firstname" :firstname, "lastname"  : lastname,"username":username,"password":password,"role":role,"department":jsonDep };
+ // console.log(JSONObj)
+ // console.log(JSON.stringify(JSONObj))
+  
+  let xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", theUrl+"employee")
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send(JSON.stringify(JSONObj));
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          //console.log(xmlhttp.responseText);
+        }
+        else
+        {
+          console.log("ERRRROR");
+        }
+       // getAllData();
+      }
+}
+</script>
+</html>

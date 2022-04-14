@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+     
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="statusDisplay.html">Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="dipartment.html">Department</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="Employee.html">Employees</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="events.html">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="reimbursement.html">Reimbursement</a>
+        </li>
+      </ul>
+      <button onclick="logout()">Logout</button>
+    </div>
+</nav>
+</div>
+
+<div class="container">
+		
+	<div class="row d-grid gap-3  p-4">
+		<h1 class="text-center  p-2 bg-light border ">EVENTS</h1>
+	</div>
+</div>
+<div class="container">
+        <button type="button" class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNew">ADD NEW EVENTS</button><br><br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Event Type</th>
+      <th scope="col">Event ID</th>
+      <th scope="col">DELETE</th>
+      <th scope="col">UPDATE</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+   
+  </tbody>
+</table>
+</div>
+
+
+<!-- Modal  ADD NEW STATUS-->
+<div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNew">ADD NEW EVENTS</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+           <input type="text"  id="event_type" class="form-control form-control-lg" type="text" placeholder="Event Type" required>
+            <br>
+           <input type="number"  id="event_id" class="form-control form-control-lg" type="text" placeholder="Event Id" required>
+          <div class="modal-footer">
+            <button class="btn btn-primary d-grid gap-2 col-6 mx-auto"  onclick="addNewData()"   data-bs-dismiss="modal" >Submit</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal  ADD UPDATE-->
+<div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="update">UPDATE EVENTS</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+           <input type="text"  id="event_type_u" class="form-control form-control-lg" type="text" placeholder="Event Type" required>
+            <br>
+           <input type="number"  id="event_id_u" class="form-control form-control-lg" type="text" placeholder="Event Id" required>
+          <div class="modal-footer">
+            <button class="btn btn-primary d-grid gap-2 col-6 mx-auto"  onclick="update()"   data-bs-dismiss="modal" >Submit</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<style>
+  
+  html {
+    background-color: #56baed;
+  }
+</style>
+<script src="config.js"></script>
+<script>
+let responsData;
+let data={};
+let selectedUpdateId;
+function deleteData(id)
+{
+  this.id=id;
+  console.log(id);
+  let ok=confirm("Are you confirm..?");
+  if(ok)
+  {
+      let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+      xmlhttp.open("DELETE", theUrl+"event/"+id);
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send();
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          console.log(xmlhttp.responseText);
+        }
+        getAllData();
+      }
+  }
+  else
+  {
+    console.log("false");
+  }
+}
+
+function updateData(updateId)
+{
+
+  let myModal = new bootstrap.Modal(document.getElementById('update'))
+  
+  myModal.show()
+  let alldata=responsData
+  let selected;
+  console.log(updateId);
+  selectedUpdateId=updateId;
+  for (let index = 0; index < alldata.length; index++) {
+    const element = alldata[index];
+    console.log(element.id);
+    if(element.id==updateId)
+    {
+      console.log(element);
+      selected=element;
+    }
+  }
+  document.getElementById("event_type_u").value =selected.event_type;
+  document.getElementById("event_id_u").value =selected.event_id;
+}
+
+function update()
+{
+  console.log(selectedUpdateId)
+  let myModal = new bootstrap.Modal(document.getElementById('update'))
+  myModal.hide()
+  
+  let event_type= document.getElementById("event_type_u").value;
+  let event_id = document.getElementById("event_id_u").value;
+  
+  let JSONObj = { "event_type" :event_type, "event_id"  : event_id };
+  console.log(JSONObj)
+  let xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("PATCH", theUrl+"event/"+selectedUpdateId)
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send(JSON.stringify(JSONObj));
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          console.log(xmlhttp.responseText);
+        }
+        else
+        {
+          console.log("ERRRROR");
+        }
+        getAllData();
+      }
+      
+}
+
+window.addEventListener('load', function() {
+  
+let user=sessionStorage.getItem('role');
+ console.log(user)
+ if(user==admin)
+ {
+  getAllData();
+ } 
+ else
+ {
+  window.location = "index.html"
+ } 
+
+});
+
+function getAllData()
+{
+	let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+	xmlhttp.open("GET", theUrl+"event");
+	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xmlhttp.send();
+	xmlhttp.onreadystatechange=function()
+	{
+		if(xmlhttp.status==200)
+		{
+			console.log(xmlhttp.responseText);
+			
+      responsData =JSON.parse(xmlhttp.responseText);
+      //responsData.forEach(element => console.log(element));
+      let htmlContent="";
+      // htmlContent="<tr> <td>1</td> <td>1</td> <td>1</td>  <td> <button class=btn btn-danger onclick=deleteData(1)>DELETE</button> </td>  <td> <button class=btn btn-danger onclick=updateData(1)>UPDATE</button> </td> </tr>";
+      //document.getElementById("tbody").innerHTML=htmlContent;
+      for(i=0;i<responsData.length;i++)
+      {
+        htmlContent=htmlContent+"<tr> <td>"+responsData[i].event_type+"</td> <td>"+responsData[i].event_id+"<td> <button class=btn btn-danger onclick=deleteData("+responsData[i].id+")>DELETE</button> </td>  <td> <button class=btn btn-danger onclick=updateData("+responsData[i].id+")>UPDATE</button> </td> </tr>";
+        console.log(responsData[i])
+
+      }
+      document.getElementById("tbody").innerHTML=htmlContent;
+			
+		}
+	}
+}
+
+
+function addNewData()
+{
+  let event_type = document.getElementById("event_type").value;
+  let event_id = document.getElementById("event_id").value;
+  
+  let JSONObj = { "event_type" :event_type, "event_id"  : event_id };
+  console.log(JSONObj)
+  let xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", theUrl+"event")
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send(JSON.stringify(JSONObj));
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          console.log(xmlhttp.responseText);
+        }
+        else
+        {
+          console.log("ERRRROR");
+        }
+        getAllData();
+      }
+}
+</script>
+</html>

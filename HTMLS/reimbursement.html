@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+     
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="statusDisplay.html">Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="dipartment.html">Department</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="Employee.html">Employees</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="events.html">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="reimbursement.html">Reimbursement</a>
+        </li>
+      </ul>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+</div>
+
+<div class="container">
+		
+	<div class="row d-grid gap-3  p-4">
+		<h1 class="text-center  p-2 bg-light border ">ALL REQUESTS</h1>
+	</div>
+</div>
+<div class="container">
+        <!-- <button type="button" class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNew">ADD NEW EMPLOYEE</button><br><br> -->
+<div class="table-responsive">
+<table class="table table-sm" >
+  <thead>
+    <tr>
+      <th scope="col">E-Name</th>
+      <th scope="col">Dep Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Event</th>
+      <th scope="col">Date</th>
+      <th scope="col">UPDATE</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+   
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<!-- Modal  VIEW-->
+<div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">VIEW Reimbursement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>First Name</label>
+        <br>
+        <input type="text" id="firstname_v" class="form-control form-control-lg" type="text" placeholder="FirstName"
+          required disabled>
+        <br>
+        <label>Last Name</label>
+        <br>
+        <input type="text" id="lastname_v" class="form-control form-control-lg" type="text" placeholder="Last Name"
+          required disabled>
+        <br>
+        <label>Dep Name</label>
+        <br>
+        <input type="text" id="dept_name_v" class="form-control form-control-lg" type="text" placeholder="User Name"
+          required disabled>
+        <br>
+        <label>Event</label>
+        <br>
+        <input type="text" id="event_type_v" class="form-control form-control-lg" type="text" placeholder="Password"
+          required disabled>
+        <br>
+        <label>Status</label>
+        <br>
+        <input type="text" id="status_v" class="form-control form-control-lg" type="text" placeholder="Role" required
+          disabled>
+        <br>
+        <label>Cost</label>
+        <br>
+        <input type="text" id="cost_v" class="form-control form-control-lg" type="text" placeholder="Department ID"
+          required disabled>
+        <br>
+        <label>Event date</label>
+        <br>
+        <input type="text" id="event_date_v" class="form-control form-control-lg" type="text" placeholder="Department Name"
+          required disabled>
+        <br>
+        <label>Submited Date</label>
+        <br>
+        <input type="text" id="submited_date_v" class="form-control form-control-lg" type="text"
+          placeholder="Department Head ID.." required disabled>
+          <br>
+          <label>Location</label>
+          <br>
+        <input type="text" id="location_v" class="form-control form-control-lg" type="text"
+          placeholder="Department Head ID.." required disabled>
+          <br>
+          <label>Description</label>
+          <br>
+          <textarea id="description_v" class="form-control"  rows="3"></textarea>
+
+         
+        <div class="modal-footer">
+          <!-- <button class="btn btn-primary d-grid gap-2 col-6 mx-auto"  onclick="update()"   data-bs-dismiss="modal" >Submit</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal  UPDATE-->
+<div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Reimbursement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>First Name</label>
+        <br>
+        <input type="text" id="firstname_u" class="form-control form-control-lg" type="text" placeholder="FirstName"
+          required disabled>
+        <br>
+        <label>Last Name</label>
+        <br>
+        <input type="text" id="lastname_u" class="form-control form-control-lg" type="text" placeholder="Last Name"
+          required disabled>
+        <br>
+        <label>Dep Name</label>
+        <br>
+        <input type="text" id="dept_name_u" class="form-control form-control-lg" type="text" placeholder="User Name"
+          required disabled>
+        <br>
+        <label>Event</label>
+        <br>
+        <input type="text" id="event_type_u" class="form-control form-control-lg" type="text" placeholder="Password"
+          required disabled>
+        <br>
+        <label>Status</label>
+        <br>
+        <input type="text" id="status_u" class="form-control form-control-lg" type="text" placeholder="Role" required
+          disabled>
+        <br>
+        <label>Change Status</label>
+        <br>
+        <select id="statusList"  class="form-select form-select-lg mb-3" name="statusList" onchange="statusChanged()" >
+          <br>
+        <label>Cost</label>
+        <br>
+        <input type="text" id="cost_u" class="form-control form-control-lg" type="text" 
+          required disabled style="margin-top: 10px;">
+        <br>
+        <label>Event date</label>
+        <br>
+        <input type="text" id="event_date_u" class="form-control form-control-lg" type="text" 
+          required disabled>
+        <br>
+        <label>Submited Date</label>
+        <br>
+        <input type="text" id="submited_date_u" class="form-control form-control-lg" type="text"
+           required disabled>
+          <br>
+          <label>Location</label>
+          <br>
+        <input type="text" id="location_u" class="form-control form-control-lg" type="text"
+           required disabled>
+          <br>
+          <label>Description</label>
+          <br>
+          <textarea id="description_u" class="form-control"  rows="3" disabled></textarea>
+
+        <div class="modal-footer">
+        <button class="btn btn-primary d-grid gap-2 col-6 mx-auto"  onclick="updateStatus()"   data-bs-dismiss="modal" >Submit</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</body>
+<style>
+html {
+  background-color: #56baed;
+}
+</style>  
+<script src="config.js"></script>
+<script>
+let responsData;
+let data={};
+let selectedUpdateId;
+let departmendselectedId;
+let selected;
+function statusChanged()
+{
+   departmendselectedId = document.getElementById('statusList').value;
+   console.log(departmendselectedId)
+
+}
+
+function view(eid)
+{
+  console.log(eid)
+  let myModal = new bootstrap.Modal(document.getElementById('view'))
+  myModal.show()
+  for(i=0;i<responsData.length;i++)
+  {
+    if(eid==responsData[i].id)
+    {
+      console.log(responsData[i])
+      var dep=responsData[i].department
+      document.getElementById("firstname_v").value =responsData[i].firstname;
+      document.getElementById("lastname_v").value =responsData[i].lastname;
+      document.getElementById("username_v").value =responsData[i].username;
+      document.getElementById("password_v").value =responsData[i].password;
+      document.getElementById("role_v").value =responsData[i].role;
+      document.getElementById("deptid_v").value =dep.deptid;
+      document.getElementById("dept_name_v").value =dep.dept_name;
+      document.getElementById("dep_head_id_v").value =dep.dep_head_id;
+    }
+  }
+  
+}
+
+function deleteData(id)
+{
+  this.id=id;
+  console.log(id);
+  let ok=confirm("Are you confirm..?");
+  if(ok)
+  {
+      let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+      xmlhttp.open("DELETE", theUrl+"department/"+id);
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send();
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          console.log(xmlhttp.responseText);
+        }
+        getAllData();
+      }
+  }
+  else
+  {
+    console.log("false");
+  }
+}
+
+function updateData(updateId)
+{
+  getStatus();
+  console.log(updateId);
+  let myModal = new bootstrap.Modal(document.getElementById('update'))
+  myModal.show()
+  let alldata=responsData
+  console.log(alldata)
+
+  selectedUpdateId=updateId;
+  for (let index = 0; index < alldata.length; index++) {
+    const element = alldata[index];
+    console.log(element.id);
+    if(element.id==updateId)
+    {
+      console.log(element);
+      selected=element;
+    }
+  }
+  console.log(selected);
+
+       let emp=selected.employee
+       let dep=emp.department
+       let event=selected.event
+       let status=selected.status
+
+
+  document.getElementById("firstname_u").value =emp.firstname;
+  document.getElementById("lastname_u").value =emp.lastname;
+  document.getElementById("dept_name_u").value =dep.dept_name;
+  document.getElementById("event_type_u").value =event.event_type;
+  document.getElementById("status_u").value =status.status_name;
+  document.getElementById("cost_u").value =selected.cost;
+  document.getElementById("event_date_u").value =selected.event_date;
+  document.getElementById("submited_date_u").value =selected.submited_date;
+  document.getElementById("location_u").value =selected.location;
+  document.getElementById("description_u").value =selected.description;
+}
+
+function updateStatus()
+{
+  
+  console.log(selectedUpdateId)
+  console.log(selected)
+
+ 
+
+/*
+  {
+    "id": 25,
+    "employee": {
+        "id": 24,
+        "firstname": "masu",
+        "lastname": "kc",
+        "username": "masu",
+        "password": "masu",
+        "role": "employee",
+        "department": {
+            "id": 24,
+            "deptid": 6,
+            "dept_name": "Learners",
+            "dep_head_id": 6
+        }
+    },
+    "event": {
+        "id": 19,
+        "event_type": "Job",
+        "event_id": 4
+    },
+    "status": {
+        "id": 1,
+        "statusid": 1,
+        "status_name": "Requested"
+    },
+    "cost": 100,
+    "event_date": "2022-03-31",
+    "description": "description",
+    "location": "alpy",
+    "submited_date": "2022-04-06"
+}
+*/
+
+  let id=selected.id
+
+  let emp={"id":selected.employee.id}
+  let event={"id":selected.event.id}
+  let status={"id":departmendselectedId}
+  
+
+  let JSONObj = { "employee" :emp, "event"  : event,"status":status,"cost":selected.cost,"event_date":selected.event_date,"description":selected.description,"location":selected.location,"submited_date":selected.submited_date};
+  console.log(JSONObj)
+  console.log(id)
+  let xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("PATCH", theUrl+"reimbursement/"+id)
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send(JSON.stringify(JSONObj));
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          console.log(xmlhttp.responseText);
+        }
+        else
+        {
+          console.log("ERRRROR");
+        }
+        getAllData();
+      }
+      
+}
+
+window.addEventListener('load', function() {
+
+ let user=sessionStorage.getItem('role');
+ console.log(user)
+ if(user=='admin' || user=='manager')
+ {
+  getAllData();
+ 
+ } 
+ else
+ {
+  window.location = "index.html"
+ }
+
+});
+function getStatus()
+{
+
+  let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+	xmlhttp.open("GET", theUrl+"status");
+	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xmlhttp.send();
+	xmlhttp.onreadystatechange=function()
+	{
+		if(xmlhttp.status==200)
+		{
+      const sb = document.querySelector('#statusList');
+			//console.log(xmlhttp.responseText);
+      responsData =JSON.parse(xmlhttp.responseText);;
+      for(i=0;i<responsData.length;i++)
+      {
+        //console.log(responsData[i])
+        const option1 = new Option(responsData[i].status_name,responsData[i].id);
+        sb.add(option1,undefined)
+      }
+			
+		}
+	}
+}
+
+function getAllData()
+{
+	let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+	xmlhttp.open("GET", theUrl+"reimbursement");
+	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xmlhttp.send();
+	xmlhttp.onreadystatechange=function()
+	{
+		if(xmlhttp.status==200)
+		{
+			//console.log(xmlhttp.responseText);
+			
+      responsData =JSON.parse(xmlhttp.responseText);
+     // responsData.forEach(element => console.log(element));
+
+      let htmlContent="";
+      // htmlContent="<tr> <td>1</td> <td>1</td> <td>1</td>  <td> <button class=btn btn-danger onclick=deleteData(1)>DELETE</button> </td>  <td> <button class=btn btn-danger onclick=updateData(1)>UPDATE</button> </td> </tr>";
+      //document.getElementById("tbody").innerHTML=htmlContent;
+      for(i=0;i<responsData.length;i++)
+      {
+       let emp=responsData[i].employee
+       let dep=emp.department
+       let event=responsData[i].event
+       let status=responsData[i].status
+        htmlContent=htmlContent+"<tr> <td>"+emp.firstname+"</td><td>"+dep.dept_name+"</td><td>"+status.status_name+"</td><td>"+event.event_type+"</td><td>"+responsData[i].submited_date+"</td><td> <button class=btn btn-danger onclick=updateData("+responsData[i].id+")>UPDATE</button> </td> </tr>";
+      }
+       document.getElementById("tbody").innerHTML=htmlContent;
+       
+		}
+	}
+}
+
+function addNewData()
+{
+
+  let firstname=document.getElementById("firstname").value 
+  let lastname= document.getElementById("lastname").value 
+  let username =document.getElementById("username").value 
+  let password =document.getElementById("password").value 
+  let role =document.getElementById("role").value
+
+  console.log(departmendselectedId)
+
+  let jsonDep={"id":departmendselectedId}
+  let JSONObj = { "firstname" :firstname, "lastname"  : lastname,"username":username,"password":password,"role":role,"department":jsonDep };
+ // console.log(JSONObj)
+ // console.log(JSON.stringify(JSONObj))
+  
+  let xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", theUrl+"employee")
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xmlhttp.send(JSON.stringify(JSONObj));
+      xmlhttp.onreadystatechange=function()
+      {
+        if(xmlhttp.status==200)
+        {
+          console.log(xmlhttp.responseText);
+        }
+        else
+        {
+          console.log("ERRRROR");
+        }
+        getAllData();
+      }
+}
+</script>
+</html>
