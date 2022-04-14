@@ -326,40 +326,6 @@ function updateStatus()
 
  
 
-/*
-  {
-    "id": 25,
-    "employee": {
-        "id": 24,
-        "firstname": "masu",
-        "lastname": "kc",
-        "username": "masu",
-        "password": "masu",
-        "role": "employee",
-        "department": {
-            "id": 24,
-            "deptid": 6,
-            "dept_name": "Learners",
-            "dep_head_id": 6
-        }
-    },
-    "event": {
-        "id": 19,
-        "event_type": "Job",
-        "event_id": 4
-    },
-    "status": {
-        "id": 1,
-        "statusid": 1,
-        "status_name": "Requested"
-    },
-    "cost": 100,
-    "event_date": "2022-03-31",
-    "description": "description",
-    "location": "alpy",
-    "submited_date": "2022-04-06"
-}
-*/
 
   let id=selected.id
 
@@ -475,7 +441,7 @@ function addNewData()
 
   let jsonDep={"id":departmendselectedId}
   let JSONObj = { "firstname" :firstname, "lastname"  : lastname,"username":username,"password":password,"role":role,"department":jsonDep };
- // console.log(JSONObj)
+ 
  // console.log(JSON.stringify(JSONObj))
   
   let xmlhttp = new XMLHttpRequest();
