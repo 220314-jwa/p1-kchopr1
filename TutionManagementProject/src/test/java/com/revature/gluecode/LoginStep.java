@@ -15,12 +15,15 @@ import io.cucumber.java.BeforeAll;
 
 
 public class LoginStep {
-	public class LoginStepImpl {
-		static WebDriver driver;
-		static PetAppHomePage petAppHome;
-		
-		@BeforeAll
-		public static void setUp() {
-			File file = new File("src/test/resources/chromedriver.exe");
+	
+		public void setUp() {
+			File file = new File("C:\Users\konar\Downloads\chromedriver_win32 (1).zip");
 			System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+			
+			 WebDriver driver = new ChromeDriver();
+			static 
+			
+		
 }
+
+	}

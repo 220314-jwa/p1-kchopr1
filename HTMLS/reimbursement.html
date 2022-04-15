@@ -5,6 +5,7 @@
 
 <title>Insert title here</title>
 </head>
+
 <body>
 <div class="container">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -239,7 +240,7 @@ function view(eid)
     if(eid==responsData[i].id)
     {
       console.log(responsData[i])
-      var dep=responsData[i].department
+      let dep=responsData[i].department
       document.getElementById("firstname_v").value =responsData[i].firstname;
       document.getElementById("lastname_v").value =responsData[i].lastname;
       document.getElementById("username_v").value =responsData[i].username;

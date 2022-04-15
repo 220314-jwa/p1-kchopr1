@@ -132,10 +132,10 @@ function deleteData(id)
 {
   this.id=id;
   console.log(id);
-  var ok=confirm("Are you confirm..?");
+  let ok=confirm("Are you confirm..?");
   if(ok)
   {
-      var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+      let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
       xmlhttp.open("DELETE", theUrl+"department/"+id);
       xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xmlhttp.send();
@@ -157,11 +157,11 @@ function deleteData(id)
 function updateData(updateId)
 {
 
-  var myModal = new bootstrap.Modal(document.getElementById('update'))
+  let myModal = new bootstrap.Modal(document.getElementById('update'))
   
   myModal.show()
-  var alldata=responsData
-  var selected;
+  let alldata=responsData
+  let selected;
   console.log(updateId);
   selectedUpdateId=updateId;
   for (let index = 0; index < alldata.length; index++) {
@@ -181,16 +181,16 @@ function updateData(updateId)
 function update()
 {
   console.log(selectedUpdateId)
-  var myModal = new bootstrap.Modal(document.getElementById('update'))
+  let myModal = new bootstrap.Modal(document.getElementById('update'))
   myModal.hide()
   
   let deptid= document.getElementById("deptid_u").value;
   let dept_name = document.getElementById("dept_name_u").value;
   let dep_head_id = document.getElementById("dep_head_id_u").value;
   
-  var JSONObj = { "deptid" :deptid, "dept_name"  : dept_name,"dep_head_id":dep_head_id };
+  let JSONObj = { "deptid" :deptid, "dept_name"  : dept_name,"dep_head_id":dep_head_id };
   console.log(JSONObj)
-  var xmlhttp = new XMLHttpRequest();
+  let xmlhttp = new XMLHttpRequest();
       xmlhttp.open("PATCH", theUrl+"department/"+selectedUpdateId)
       xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xmlhttp.send(JSON.stringify(JSONObj));
@@ -210,7 +210,7 @@ function update()
 }
 
 window.addEventListener('load', function() {
-  var user=sessionStorage.getItem('role');
+  let user=sessionStorage.getItem('role');
  console.log(user)
  if(user=='admin')
  {
@@ -224,7 +224,7 @@ window.addEventListener('load', function() {
 
 function getAllData()
 {
-	var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+	let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
 	xmlhttp.open("GET", theUrl+"department");
 	xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xmlhttp.send();

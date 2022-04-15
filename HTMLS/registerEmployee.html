@@ -5,6 +5,7 @@
 
 <title>Insert title here</title>
 </head>
+
 <body>
 <div class="container">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -209,7 +210,7 @@ function view(eid)
     if(eid==responsData[i].id)
     {
       console.log(responsData[i])
-     // var temp=JSON.parse(responsData[i])
+     // let temp=JSON.parse(responsData[i])
       let emp=responsData[i].employee
       let dep=emp.department
       let event=responsData[i].event
@@ -239,7 +240,7 @@ function view(eid)
 function updateData(updateId)
 {
   console.log(updateId);
- // var myModal = new bootstrap.Modal(document.getElementById('update'))
+ // let  myModal = new bootstrap.Modal(document.getElementById('update'))
   //myModal.show()
   let alldata=responsData
   console.log(alldata)
